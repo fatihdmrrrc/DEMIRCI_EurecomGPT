@@ -1,0 +1,24 @@
+{
+  "attention": {
+    "naive_ms": 267.64,
+    "vectorized_ms": 1.13,
+    "speedup": 236.85
+  },
+  "threads": {
+    "1": 2651.81,
+    "2": 2200.63,
+    "4": 2325.58,
+    "8": 2302.07
+  },
+  "devices": {
+    "cpu_ms": 448178.0,
+    "gpu_ms": 14798.0
+  },
+  "training": {
+    "steps": 2000,
+    "final_loss": 1.477,
+    "param_count": 4935680
+  },
+  "sample_text": "\nMire med from your incely\nAreldly in not.\n\nPOMPEY:\nTwelxignor, Justin you, and you to dexemith;\nMy enger is no more well, one thou gentle day,\nAnd perposon that the world of men.\n\nFirst Murderer:\nWher",
+  "gcs_url": "https://storage.googleapis.com/demircieurecomgpt-eurecomgpt/model.safetensors"
+}
