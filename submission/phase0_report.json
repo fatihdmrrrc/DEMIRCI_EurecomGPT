@@ -1,0 +1,24 @@
+{
+  "phase": "0",
+  "environment": {
+    "cloud_shell": true
+  },
+  "python": {
+    "version": "3.12.3",
+    "ok": true
+  },
+  "gcloud": {
+    "account": "Fatih-Mehmet.Demirci@eurecom.fr",
+    "project": "demircieurecomgpt",
+    "error": null
+  },
+  "docker": {
+    "version": "Docker version 29.9.3, build 5457199",
+    "present": true
+  },
+  "git": {
+    "remote": "https://github.com/fatihdmrrrc/DEMIRCI_EurecomGPT",
+    "is_github": true,
+    "slug": "fatihdmrrrc/DEMIRCI_EurecomGPT"
+  }
+}
