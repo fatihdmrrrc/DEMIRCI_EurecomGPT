@@ -19,6 +19,10 @@
     "final_loss": 1.477,
     "param_count": 4935680
   },
-  "sample_text": "\nMire med from your incely\nAreldly in not.\n\nPOMPEY:\nTwelxignor, Justin you, and you to dexemith;\nMy enger is no more well, one thou gentle day,\nAnd perposon that the world of men.\n\nFirst Murderer:\nWher",
-  "gcs_url": "https://storage.googleapis.com/demircieurecomgpt-eurecomgpt/model.safetensors"
+  "model": {
+    "gcs_url": "https://storage.googleapis.com/demircieurecomgpt-eurecomgpt/model.safetensors"
+  },
+  "gcs_url": "https://storage.googleapis.com/demircieurecomgpt-eurecomgpt/model.safetensors",
+  "sample": "\nMire med from your incely\nAreldly in not.\n\nPOMPEY:\nTwelxignor, Justin you, and you to dexemith;\nMy enger is no more well, one thou gentle day,\nAnd perposon that the world of men.\n\nFirst Murderer:\nWher",
+  "sample_text": "\nMire med from your incely\nAreldly in not.\n\nPOMPEY:\nTwelxignor, Justin you, and you to dexemith;\nMy enger is no more well, one thou gentle day,\nAnd perposon that the world of men.\n\nFirst Murderer:\nWher"
 }
