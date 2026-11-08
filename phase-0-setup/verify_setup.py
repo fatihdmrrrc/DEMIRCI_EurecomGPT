@@ -1,3 +1,4 @@
+cat << 'EOF' > phase-0-setup/verify_setup.py
 #!/usr/bin/env python3
 """Phase 0 self-check — probes your environment and writes a submission report.
 
@@ -48,10 +49,16 @@ def parse_gcloud_config(raw: str) -> dict:
     Args:
         raw: the raw stdout string from the gcloud command (may be empty).
     """
-    # TODO: parse `raw` as JSON and return {"account": ..., "project": ...}
-    #       from the "core" section. Return empty strings if raw is empty or a
-    #       field is missing.
-    raise NotImplementedError("Phase 0: implement parse_gcloud_config()")
+    if not raw or not raw.strip():
+        return {"account": "", "project": ""}
+    try:
+        data = json.loads(raw)
+        core = data.get("core", {}) if isinstance(data, dict) else {}
+        account = str(core.get("account") or "")
+        project = str(core.get("project") or "")
+        return {"account": account, "project": project}
+    except Exception:
+        return {"account": "", "project": ""}
 
 
 def parse_repo_slug(remote_url: str) -> str:
@@ -67,9 +74,21 @@ def parse_repo_slug(remote_url: str) -> str:
     Args:
         remote_url: output of ``git remote get-url origin`` (may be empty).
     """
-    # TODO: return "owner/repo" for both the HTTPS and SSH forms shown above.
-    #       Strip any trailing ".git". Return "" if not a github.com URL.
-    raise NotImplementedError("Phase 0: implement parse_repo_slug()")
+    if not remote_url or "github.com" not in remote_url:
+        return ""
+
+    cleaned = remote_url.strip()
+    if cleaned.endswith(".git"):
+        cleaned = cleaned[:-4]
+
+    if "github.com/" in cleaned:
+        slug = cleaned.split("github.com/")[-1]
+    elif "github.com:" in cleaned:
+        slug = cleaned.split("github.com:")[-1]
+    else:
+        return ""
+
+    return slug.strip("/")
 
 
 # --------------------------------------------------------------------------- #
@@ -160,3 +179,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+EOF
