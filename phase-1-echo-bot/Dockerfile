@@ -1,25 +1,21 @@
-# Multi-stage build for the echo bot.
-#   Stage 1 (builder) installs the Python deps into a throwaway layer.
-#   Stage 2 (runtime) is a slim image that copies only the installed packages + app.
-# The two stages keep the final image small (target < 400 MB) — inspect it with
-# `docker images` and discuss the size in your report.
-#
-# Two lines are left for YOU to complete (search for TODO).
-
-# ---- Stage 1: builder ----
+# Stage 1: Build dependencies
 FROM python:3.11-slim AS builder
+
 WORKDIR /app
 COPY requirements.txt .
-# TODO: install the requirements into the prefix /install so stage 2 can copy them.
-#       Hint: pip install --no-cache-dir --prefix=/install -r requirements.txt
+RUN pip install --no-cache-dir --user -r requirements.txt
 
-# ---- Stage 2: runtime ----
-FROM python:3.11-slim
+# Stage 2: Lightweight runtime
+FROM python:3.11-slim AS runner
+
 WORKDIR /app
-# Bring in the packages installed in the builder (site-packages + console scripts).
-COPY --from=builder /install /usr/local
+# Copy installed Python packages from builder
+COPY --from=builder /root/.local /root/.local
 COPY app.py .
+
+ENV PATH=/root/.local/bin:$PATH
 ENV PORT=8080
+
 EXPOSE 8080
-# TODO: set the CMD to launch gunicorn, binding 0.0.0.0:8080 and serving "app:app". Use 1 worker and 8 threads.
-#       Use the JSON/exec form: CMD ["gunicorn", "--bind", "0.0.0.0:8080", ...]
+
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "1", "--threads", "8", "--timeout", "0", "app:app"]
